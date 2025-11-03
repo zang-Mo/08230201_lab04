@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Learning Journey</title>
+    <link rel="stylesheet" href="{% static 'styles/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>My Learning Journey</h1>
+        <nav>
+            <a href="{% url 'index' %}">Home</a>
+            <a href="{% url 'about_me' %}">About Me</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Skills Section -->
+        <section>
+            <h2>Skills I've Learned</h2>
+            <div class="card-container">
+                {% for skill in skills %}
+                    <div class="card">
+                        <h3>{{ skill.name }}</h3>
+                        <p>{{ skill.description }}</p>
+                        <span class="level">Level: {{ skill.level }}</span>
+                    </div>
+                {% empty %}
+                    <p>No skills added yet.</p>
+                {% endfor %}
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section>
+            <h2>Education</h2>
+            <div class="card-container">
+                {% for edu in education %}
+                    <div class="card">
+                        <h3>{{ edu.degree }}</h3>
+                        <p><strong>{{ edu.institution }}</strong></p>
+                        <p>Year Completed: {{ edu.year_completed }}</p>
+                        <p>{{ edu.description }}</p>
+                    </div>
+                {% empty %}
+                    <p>No education details added yet.</p>
+                {% endfor %}
+            </div>
+        </section>
+
+        <!-- Challenges Section -->
+        <section>
+            <h2>Challenges I Faced</h2>
+            <div class="card-container">
+                {% for challenge in challenges %}
+                    <div class="card">
+                        <h3>{{ challenge.title }}</h3>
+                        <p>{{ challenge.description }}</p>
+                        {% if challenge.how_overcome %}
+                            <p><strong>How I Overcame:</strong> {{ challenge.how_overcome }}</p>
+                        {% endif %}
+                    </div>
+                {% empty %}
+                    <p>No challenges recorded yet.</p>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Sonam Zangmo</p>
+    </footer>
+</body>
+</html>
